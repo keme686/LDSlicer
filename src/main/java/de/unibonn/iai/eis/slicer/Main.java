@@ -30,7 +30,7 @@ public class Main {
 			+ "}";
 	
 	static String interest = "CONSTRUCT {"
-			+ "   ?s     ?p      ?o."
+			//+ "   ?s     ?p      ?o."
 			+ "   ?x 	 ?y 	 ?s "			
 			+ "   }"
 			+ "WHERE { "
@@ -38,7 +38,25 @@ public class Main {
 			+ "   ?s ?p ?o."
 			+ "   OPTIONAL{ ?x ?y ?s}"		
 			+ "}";
-	
+	static String filminterest = "CONSTRUCT {"
+			+ "   ?s     ?p      ?o."
+			//+ "   ?x 	 ?y 	 ?s "			
+			+ "   }"
+			+ "WHERE { "
+			+ "   ?s a <http://dbpedia.org/ontology/Film>."
+			+ "   ?s ?p ?o."
+			//+ "   OPTIONAL{ ?x ?y ?s}"		
+			+ "}";
+
+	static String politicsinterest = "CONSTRUCT {"
+			+ "   ?s     ?p      ?o."
+			//+ "   ?x 	 ?y 	 ?s "			
+			+ "   }"
+			+ "WHERE { "
+			+ "   ?s a <http://dbpedia.org/ontology/Politician>."
+			+ "   ?s ?p ?o."
+			//+ "   OPTIONAL{ ?x ?y ?s}"		
+			+ "}";
 	static String interest2 = "CONSTRUCT {"
 			+ "   ?s     ?p      ?o. "
 			+ "   ?x 	?y 		?s. "
@@ -56,22 +74,35 @@ public class Main {
 			+ "    ?o 		?b      ?c"
 			+ "   }"		
 			+ "}";
+	
+	static String soccer_wikidata = "CONSTRUCT {"
+			+ "   ?s     ?p      ?o."					
+			+ "   }"
+			+ "WHERE { "
+			+ "   ?s <http://www.wikidata.org/prop/direct/P106> <http://www.wikidata.org/entity/Q937857>."
+			+ "   ?s ?p ?o."
+			//+ "   OPTIONAL{ ?x ?y ?s}"		
+			+ "}";
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		int offset = 5000;
 		int depth = 1;
-		String inUri="http://dbpedia.org/sparql";
+		String inUri="http://milenio.dcc.uchile.cl/sparql"; //"http://dbpedia.org/sparql";
 		String outputFormat = "NT";
-		if(args == null || args.length < 3){
+		String outputName="soccer-wikidata-slice.nt";
+		String sliceQuery = soccer_wikidata; 
+		/*if(args == null || args.length < 3){
 			System.out.println("Format: ");
 			return;
 		}
-		inUri = args[0];
-		String sliceQuery= args[1];
-		String outputName=args[2];		
-		if(args.length > 3){
+		inUri = args[0];*/
+	
+		//String sliceQuery= args[1];
+		//String outputName=args[2];		
+		
+		/*if(args.length > 3){
 			try{
 				offset = Integer.parseInt(args[3]);
 			}catch(Exception e){
@@ -81,6 +112,7 @@ public class Main {
 		}
 		if(args.length > 4)
 			outputFormat = args[4];
+		*/
 		SinkType sinkType = SinkType.FILE;
 		if(outputFormat.equalsIgnoreCase("NT"))
 			sinkType =SinkType.FILE_NT;
@@ -93,7 +125,6 @@ public class Main {
 		}else if(outputFormat.equalsIgnoreCase("JSONLD")){
 			sinkType =SinkType.FILE_JSONLD;
 		}
-		
 		Slicer slicer = new EndpointSlicer(offset);
 		try{
 			slicer.process(inUri, sliceQuery, depth, outputName, sinkType);

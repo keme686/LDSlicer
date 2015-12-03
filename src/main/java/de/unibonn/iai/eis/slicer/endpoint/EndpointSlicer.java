@@ -48,7 +48,7 @@ public class EndpointSlicer implements Slicer {
 		while(true){
 			System.out.println("limit=" + offset + "  offset=" + off);
 			Query sliceQuery = getNextSliceQuery(query, offset, off);
-			System.out.println(sliceQuery);
+			//System.out.println(sliceQuery);
 			Model m = SPARQLExecutor.executeConstruct(endpoint, sliceQuery);
 			if(m==null || m.isEmpty()){
 				break;
@@ -76,6 +76,7 @@ public class EndpointSlicer implements Slicer {
 					throw new SlicerException(e.getMessage());
 				}
 				log.info(m.size() +  " results inserted to file");
+				System.out.println(" results inserted to file");
 			}
 			off +=offset;
 		}
