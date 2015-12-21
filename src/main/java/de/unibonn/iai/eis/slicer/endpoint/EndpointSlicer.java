@@ -5,6 +5,7 @@ package de.unibonn.iai.eis.slicer.endpoint;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 
 import org.apache.jena.query.Dataset;
@@ -45,6 +46,7 @@ public class EndpointSlicer implements Slicer {
 	private void execSlicing(String endpoint, String query, String outUri, SinkType sinkType) throws SlicerException{
 		int off = 0;
 		Object sink = getSinkObject(outUri, sinkType);
+		
 		while(true){
 			System.out.println("limit=" + offset + "  offset=" + off);
 			Query sliceQuery = getNextSliceQuery(query, offset, off);
@@ -61,7 +63,9 @@ public class EndpointSlicer implements Slicer {
 				}
 			}else{
 				try{
+
 				PrintWriter out = new PrintWriter(new FileOutputStream(new File(outUri), true));
+					//PrintStream out = new PrintStream(new File(outUri), "UTF-8");
 				 // "RDF/XML-ABBREV", and "N3". The default value, represented by null is "RDF/XML".
 				if(sinkType == SinkType.FILE_NT )
 					m.write(out, "N-TRIPLE");
@@ -72,9 +76,9 @@ public class EndpointSlicer implements Slicer {
 				else if(sinkType == SinkType.FILE_RDF_JSON)
 					m.write(out, "RDF/JSON");
 				}catch(Exception e){
-					e.printStackTrace();
+					e.printStackTrace();					
 					throw new SlicerException(e.getMessage());
-				}
+				}				
 				log.info(m.size() +  " results inserted to file");
 				System.out.println(" results inserted to file");
 			}
