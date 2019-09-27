@@ -173,18 +173,18 @@ public class Main {
 	public static void main(String[] args) {
 		int offset = 1000;
 		int depth = 1;
-		String inUri= "https://query.wikidata.org/bigdata/namespace/wdq/sparql";//"http://live.dbpedia.org/sparql"; //  "restaurants.nt";//"http://butterbur17.iai.uni-bonn.de:8890/sparql"; //
+		// String inUri= "" // "https://query.wikidata.org/bigdata/namespace/wdq/sparql";//"http://live.dbpedia.org/sparql"; //  "restaurants.nt";//"http://butterbur17.iai.uni-bonn.de:8890/sparql"; //
 		String outputFormat = "NT";
-		String outputName= "E:\\WDSlices\\WD_film-slice-truthy.nt";
+		// String outputName= "output" //"E:\\WDSlices\\WD_film-slice-truthy.nt";
 		String sliceQuery = film_wikidata; 
-		/*if(args == null || args.length < 3){
-			System.out.println("Format: ");
+		if(args == null || args.length < 3){
+			System.out.println("Format: Main <sparql-endpoint>  <Slice-Query-str>  <out-file-name.rdf> <OutputFormat-NT,TTL,RDF/XML,RDF/JSON,JSONLD>");
 			return;
 		}
-		inUri = args[0];*/
+		String inUri = args[0];
 	
-		//String sliceQuery= args[1];
-		//String outputName=args[2];		
+		String sliceQuery= args[1];
+		String outputName=args[2];		
 		
 		/*if(args.length > 3){
 			try{
@@ -194,9 +194,10 @@ public class Main {
 				offset = 5000;
 			}
 		}
-		if(args.length > 4)
-			outputFormat = args[4];
 		*/
+		if(args.length > 3)
+			outputFormat = args[3];
+	
 		SinkType sinkType = SinkType.FILE;
 		if(outputFormat.equalsIgnoreCase("NT"))
 			sinkType =SinkType.FILE_NT;
