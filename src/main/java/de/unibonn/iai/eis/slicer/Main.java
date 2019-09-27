@@ -5,7 +5,7 @@ package de.unibonn.iai.eis.slicer;
 
 
 import de.unibonn.iai.eis.slicer.endpoint.EndpointSlicer;
-import de.unibonn.iai.eis.slicer.file.RDFFileSlicer;
+// import de.unibonn.iai.eis.slicer.file.RDFFileSlicer;
 import de.unibonn.iai.eis.slicer.model.SinkType;
 
 /**
@@ -183,9 +183,9 @@ public class Main {
 		}
 		String inUri = args[0];
 	
-		String sliceQuery= args[1];
+		sliceQuery= args[1];
 		String outputName=args[2];		
-		
+		System.out.println(sliceQuery);	
 		/*if(args.length > 3){
 			try{
 				offset = Integer.parseInt(args[3]);
@@ -213,6 +213,7 @@ public class Main {
 		Slicer slicer = new EndpointSlicer(offset);
 		//Slicer slicer = new RDFFileSlicer(offset);
 		try{
+			System.out.println(inUri + " " + outputName);
 			slicer.process(inUri, sliceQuery, depth, outputName, sinkType);
 		}catch(Exception e){
 			e.printStackTrace();

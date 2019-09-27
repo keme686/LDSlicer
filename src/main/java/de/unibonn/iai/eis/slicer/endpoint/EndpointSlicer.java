@@ -50,9 +50,10 @@ public class EndpointSlicer implements Slicer {
 		while(true){
 			System.out.println("limit=" + offset + "  offset=" + off);
 			Query sliceQuery = getNextSliceQuery(query, offset, off);
-			//System.out.println(sliceQuery);
+			System.out.println(sliceQuery +" " + sinkType);
 			Model m = SPARQLExecutor.executeConstruct(endpoint, sliceQuery);
 			if(m==null || m.isEmpty()){
+                               System.out.println("Empty result returned by the endpoint");
 				break;
 			}
 			
