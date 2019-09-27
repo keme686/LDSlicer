@@ -171,7 +171,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int offset = 1000;
+		int offset = 5000;
 		int depth = 1;
 		// String inUri= "" // "https://query.wikidata.org/bigdata/namespace/wdq/sparql";//"http://live.dbpedia.org/sparql"; //  "restaurants.nt";//"http://butterbur17.iai.uni-bonn.de:8890/sparql"; //
 		String outputFormat = "NT";

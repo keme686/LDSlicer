@@ -28,7 +28,7 @@ import de.unibonn.iai.eis.slicer.utils.SPARQLExecutor;
 public class EndpointSlicer implements Slicer {
 
 	private static Logger log = LoggerFactory.getLogger(EndpointSlicer.class);
-	private int offset = 1000;
+	private int offset = 5000;
 
 	public EndpointSlicer(int offset) {
 		this.offset = offset;
@@ -50,7 +50,7 @@ public class EndpointSlicer implements Slicer {
 		while(true){
 			System.out.println("limit=" + offset + "  offset=" + off);
 			Query sliceQuery = getNextSliceQuery(query, offset, off);
-			System.out.println(sliceQuery +" " + sinkType);
+			// System.out.println(sliceQuery +" " + sinkType);
 			Model m = SPARQLExecutor.executeConstruct(endpoint, sliceQuery);
 			if(m==null || m.isEmpty()){
                                System.out.println("Empty result returned by the endpoint");
