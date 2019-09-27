@@ -5,7 +5,7 @@ package de.unibonn.iai.eis.slicer;
 
 
 import de.unibonn.iai.eis.slicer.endpoint.EndpointSlicer;
-import de.unibonn.iai.eis.slicer.file.RDFFileSlicer;
+// import de.unibonn.iai.eis.slicer.file.RDFFileSlicer;
 import de.unibonn.iai.eis.slicer.model.SinkType;
 
 /**
